@@ -126,21 +126,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# STATIC_ROOT = "/static/"
-
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'static'),
-# )
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 # STATIC_URL = '/home/leandrochaves/Documentos/projetos/gestao_salao/static/'
 
-STATICFILES_DIRS = (
-   '/home/leandrochaves/Documentos/projetos/gestao_salao/static/',
-)
+# STATICFILES_DIRS = (
+#    '/home/leandrochaves/Documentos/projetos/gestao_salao/static/',
+# )
 
 LOGIN_REDIRECT_URL = '/'
 
