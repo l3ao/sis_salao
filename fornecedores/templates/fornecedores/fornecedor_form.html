@@ -1,0 +1,41 @@
+{% extends 'home.html' %}
+
+{% load bootstrap %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'fornecedor-list' %}">Fornecedores</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Cadastro</li>
+{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-3">{{form.cnpj|bootstrap}}</div>
+            <div class="col-md-9">{{form.rsocial|bootstrap}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">{{form.ie|bootstrap}}</div>
+            <div class="col-md-10">{{form.nome|bootstrap}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">{{form.cep|bootstrap}}</div>
+            <div class="col-md-2">{{form.estado|bootstrap}}</div>
+            <div class="col-md-8">{{form.cidade|bootstrap}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">{{form.bairro|bootstrap}}</div>
+            <div class="col-md-5">{{form.endereco|bootstrap}}</div>
+            <div class="col-md-2">{{form.endnumero|bootstrap}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">{{form.fone|bootstrap}}</div>
+            <div class="col-md-3">{{form.cel|bootstrap}}</div>
+            <div class="col-md-6">{{form.email|bootstrap}}</div>
+        </div>
+        <br>
+        <a class="btn btn-danger" href="{% url 'fornecedor-list' %}" role="button">Cancelar</a>
+        <button type="submit" class="btn btn-primary float-end">Salvar</button>
+    </form>
+{% endblock %}

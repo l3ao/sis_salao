@@ -1,0 +1,30 @@
+{% extends 'home.html' %}
+
+{% load bootstrap %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'servico-list' %}">Serviços</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Cadastro de serviço</li>
+{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-9">{{form.descricao|bootstrap}}</div>
+            <div class="col-md-3">{{form.preco|bootstrap}}</div>
+        </div>
+        <br>
+        <a class="btn btn-danger" href="{% url 'servico-list' %}" role="button">Cancelar</a>
+        <button type="submit" class="btn btn-primary float-end">Salvar</button>
+    </form>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(function() {
+            $('#id_preco').maskMoney();
+          })
+    </script>
+{% endblock %}

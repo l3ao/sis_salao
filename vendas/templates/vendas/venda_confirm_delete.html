@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'venda-list' %}">Vendas</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Delete venda</li>
+{% endblock %}
+
+{% block content %}
+    <h3>Você realmente deseja apagar a venda: {{venda}}?</h3>
+    <form method="POST">
+        {% csrf_token %}
+        <br><button type="submit" class="btn btn-primary">Confirmar</button>
+    </form>
+{% endblock %}

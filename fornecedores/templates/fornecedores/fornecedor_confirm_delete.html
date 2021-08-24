@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'fornecedor-list' %}">Fornecedores</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'fornecedor-update' fornecedor.id %}">Fornecedor {{fornecedor.rsocial}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Delete</li>
+{% endblock %}
+
+{% block content %}
+    <h1>Você tem certeza que desejar apagar a fornecedor: {{fornecedor.rsocial}}?</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Confirmar</button>
+    </form>
+{% endblock %}

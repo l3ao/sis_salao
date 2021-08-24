@@ -1,0 +1,34 @@
+{% extends 'home.html' %}
+
+{% load bootstrap %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'cliente-list' %}">Clientes</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Cadastro</li>
+{% endblock %}
+
+{% block content %}
+    <form method="POST" style="overflow: hidden;">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">{{form.nome|bootstrap}}</div>
+            <div class="col-md-3">{{form.data_nasc|bootstrap}}</div>
+            <div class="col-md-3">{{form.telefone|bootstrap}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">{{form.endereco|bootstrap}}</div>
+        </div>
+        <br>
+        <a class="btn btn-danger" href="{% url 'cliente-list' %}" role="button">Cancelar</a>
+        <button type="submit" class="btn btn-primary float-end">Salvar</button>
+    </form>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function(){
+        $("#id_telefone").mask("(00) 00000-0000");
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'home.html' %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'tipopagamento-list' %}">Tipos de pagamento</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Delete</li>
+{% endblock %}
+
+{% block content %}
+    <h3>Confirmar exclusão do tipo de pagamento: {{tipopagamento.nome}}</h3>
+    <form method="POST">
+        {% csrf_token %}
+        <br>
+        <a class="btn btn-danger" href="{% url 'tipopagamento-list' %}" role="button">Cancelar</a>
+        <button type="submit" class="btn btn-primary float-right">Confirmar</button>
+    </form>
+{% endblock %}

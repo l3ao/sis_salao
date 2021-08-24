@@ -1,0 +1,51 @@
+{% extends 'home.html' %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'recebimento-list' %}">Recebimentos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Parcelas</li>
+{% endblock %}
+
+{% block content %}
+    <h4>Cliente: {{recebimento.venda__cliente__nome}}</h4>
+    <h5>Parcelas</h5>
+    <h3>R$ {{recebimento.total|floatformat:2}}</h3>
+    <table class="table table-striped table-sm" style="text-align: center;">
+        <thead>
+            <tr>
+                <th>Venda</th>
+                <th scope="col">Status</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Valor pago</th>
+                <th scope="col">Negociada</th>
+                <th scope="col">Pagamento</th>
+                <th scope="col">Vencimento</th>
+                <th scope="col">Pagamento</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for parcela in parcelas %}
+            <tr>
+                <td>{{parcela.venda.num_venda}}</td>
+                <td>{{parcela.get_status_display}}</td>
+                <td>R$ {{parcela.valor}}</td>
+                <td>{% if parcela.valorpago %}R$ {{parcela.valorpago}}{% endif %}</td>
+                <td>{% if parcela.negociada %} Sim {% else %} Não {% endif %}</td>
+                <td>{{parcela.pagamento|default:''}}</td>
+                <td>{{parcela.datavecto|date:"d M, Y"}}</td>
+                <td>
+                    {% if parcela.datapagto %}
+                        {{parcela.datapagto|date:"d M, Y"}}
+                    {% else %}
+                        Ainda não recebido
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block botao_novo %}
+    <a class="btn btn-primary" href="{% url 'realizar-pagamento' recebimento.venda__cliente_id %}" role="button">Realizar pagamento</a>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'home.html' %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'compra-list' %}">Compras</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'compra-update' item.compra_id %}">Compra</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Exclusão - Item</li>
+{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        <h1>Confirmar exclusão do item: {{item}}?</h1>
+        {% csrf_token %}
+        <br>
+        <a href="{% url 'compra-update' item.compra_id %}" class="btn btn-danger">Cancelar</a>
+        <button type="submit" class="btn btn-primary float-end">Confirmar</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'home.html' %}
+{% load bootstrap %}
+
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'recebimento-list' %}">Recebimentos</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'recebimento-detail' venda_id %}">Parcelas</a>
+    <li class="breadcrumb-item active" aria-current="page">Parcela</li>
+{% endblock %}
+
+{% block content %}
+    <h4>Recebimento de parcela</h4>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4">{{form.valor|bootstrap}}</div>
+            <div class="col-md-4">{{form.datavecto|bootstrap}}</div>
+            <div class="col-md-4">{{form.status|bootstrap}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">{{form.datapagto|bootstrap}}</div>
+            <div class="col-md-8">{{form.pagamento|bootstrap}}</div>
+        </div>
+        <a class="btn btn-danger" href="{% url 'recebimento-detail' venda_id %}" role="button">Cancelar</a>
+        <div class="float-right">
+            <button type="submit" class="btn btn-primary">Pagar parcela</button>
+        </div>
+        <div class="float-right mx-sm-3">
+            <a href="{% url 'negociacao-parcela' parcela_id %}" role="button" class="btn btn-secondary float-right">Negociar</a>
+        </div>
+    </form>
+{% endblock %}

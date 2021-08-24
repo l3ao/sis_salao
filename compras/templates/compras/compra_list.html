@@ -1,0 +1,38 @@
+{% extends 'home.html' %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Compras</li>
+{% endblock %}
+
+{% block content %}
+    <h3>Notas de compras</h3>
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th scope="col">Número</th>
+                <th scope="col">Nota fiscal</th>
+                <th scope="col">Fornecedor</th>
+                <th scope="col">Data de cadastro</th>
+                <th scope="col">Parcelas</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for compra in compras %}
+            <tr>
+                <td>{{compra.num_compra}}</td>
+                <td>{{compra.nfiscal}}</td>
+                <td>{{compra.fornecedor}}</td>
+                <td>{{compra.data|date:"d M, Y" }}</td>
+                <td>{{compra.nparcelas}}</td>
+                <td>R$ {{compra.total|floatformat:2}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block botao_novo %}
+    <a href="{% url 'compra-add' %}" class="btn btn-primary">Nova nota de compra</a>
+{% endblock %}

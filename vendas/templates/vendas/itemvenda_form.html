@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load bootstrap %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'venda-list' %}">Vendas</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'venda-updade' item.venda_id %}">Venda {{item.venda}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Item da venda</li>
+{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <button type="submit" class="btn btn-primary">Confirmar</button>
+    </form>
+{% endblock %}

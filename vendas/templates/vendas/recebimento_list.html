@@ -1,0 +1,30 @@
+{% extends 'home.html' %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Recebimentos</li>
+{% endblock %}
+
+{% block content %}
+    <h3>Lista de clientes</h3>
+    <table class="table table-striped table-sm" style="text-align: center;">
+        <thead>
+            <tr>
+                <th scope="col">Cliente</th>
+                <th scope="col">Quantidade de vendas</th>
+                <th scope="col">Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for venda in vendas %}
+            <tr>
+                <td>{{venda.cliente__nome}}</td>
+                <td>{{venda.qt_vendas}}</td>
+                <td>R$ {{venda.total|floatformat:2}}</td>
+                <td><a href="{% url 'recebimento-detail' venda.cliente_id %}">Visualizar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

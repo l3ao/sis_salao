@@ -1,0 +1,23 @@
+{% extends 'home.html' %}
+
+{% load bootstrap %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'unidmedida-list' %}">Unidades de medida</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Cadastro</li>
+{% endblock %}
+
+{% block content %}
+    <h3>Cadastro</h3>
+    <form method="POST">
+        {% csrf_token %}        
+        <div class="row">
+            <div class="col-md-3">{{form.sigla|bootstrap}}</div>
+            <div class="col-md-9">{{form.nome|bootstrap}}</div>
+        </div>
+        <br>
+        <a class="btn btn-danger" href="{% url 'unidmedida-list' %}" role="button">Cancelar</a>
+        <button type="submit" class="btn btn-primary float-end">Salvar</button>
+    </form>
+{% endblock %}

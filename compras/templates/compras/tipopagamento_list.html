@@ -1,0 +1,32 @@
+{% extends 'home.html' %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Tipos de pagamento</li>
+{% endblock %}
+
+{% block content %}
+    <h3>Tipos de pagamentos</h3>
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th scope="col">Sigla</th>
+                <th scope="col">Nome</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pagamento in object_list %}
+            <tr>
+                <td><a href="{% url 'tipopagamento-update' pagamento.id %}">{{pagamento.sigla}}</a></td>
+                <td>{{pagamento.nome}}</td>
+                <td style="text-align: center;"><a href="{% url 'tipopagamento-delete' pagamento.id %}"><i class="bi bi-trash"></i></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block botao_novo %}
+    <a class="btn btn-primary" href="{% url 'tipopagamento-add' %}" role="button">Novo tipo de pagamento</a>
+{% endblock %}

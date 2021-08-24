@@ -1,0 +1,17 @@
+{% extends 'home.html' %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'servico-list' %}">Serviços</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Excluir serviço</li>
+{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        <h1>Confirmar exclusão do serviço: "{{servico}}"</h1>
+        {% csrf_token %}
+        <br>
+        <a class="btn btn-danger" href="{% url 'servico-list' %}" role="button">Cancelar</a>
+        <button type="submit" class="btn btn-primary float-right">Confirmar</button>
+    </form>
+{% endblock %}

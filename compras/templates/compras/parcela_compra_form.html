@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load bootstrap %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'pagamento-list' %}">Pagamentos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Pagamento</li>
+{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{form|bootstrap}}
+        <button type="submit">Salvar</button>
+    </form>
+{% endblock %}

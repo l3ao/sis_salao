@@ -1,0 +1,17 @@
+{% extends 'home.html' %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'unidmedida-list' %}">Unidades de medida</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Excluir categoria</li>
+{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        <h3>Confirmar exclusão da unidade de medida: {{unidmedida}}</h3>
+        {% csrf_token %}
+        <br>
+        <a class="btn btn-danger" href="{% url 'unidmedida-list' %}" role="button">Cancelar</a>
+        <button type="submit" class="btn btn-primary float-right">Confirmar</button>
+    </form>
+{% endblock %}

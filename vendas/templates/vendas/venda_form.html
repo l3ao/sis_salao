@@ -1,0 +1,75 @@
+{% extends 'home.html' %}
+
+{% load bootstrap %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'venda-list' %}">Vendas</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Nova venda</li>
+{% endblock %}
+
+{% block content %}
+    <div>
+        <form method="POST" action="{% url 'venda-add' %}">
+            {% csrf_token %}
+            <input type="hidden" value="{{venda.id}}" name="venda_id">
+            <div class="row">
+                <div class="col-md-3">{{form_venda.nparcelas|bootstrap}}</div>
+                <div class="col-md-9">{{form_venda.cliente|bootstrap}}</div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6"><b>Total: </b>R$ {{ venda.total|floatformat:2 }}</div>
+                <div class="col-md-6"><button type="submit" class="btn btn-primary float-end">Confirmar</button></div>
+            </div>
+        </form>
+    </div>
+
+    {% if venda %}
+        <br><div class="border" style="padding: 1.5rem;
+                                   margin-right: 0;
+                                   margin-left: 0;
+                                   border-width: 1px;
+                                   border-top-left-radius: .25rem;
+                                   border-top-right-radius: .25rem;">
+            <h3>Itens da venda</h3>
+            <form class="form-inline" method="POST" action="{% url 'itemvenda-add' venda.id  %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">{{form_item.produto|bootstrap}}</div>
+                    <div class="col-md-3">{{form_item.qtde|bootstrap}}</div>
+                    <div class="col-md-3" style="padding-top: 23px;"><button
+                        type="submit" class="btn btn-outline-primary float-right">Salvar item</button></div>
+                </div>
+            </form>
+            {% if mensagem %}
+                <br><h3>{{mensagem}}</h3>
+            {% endif %}
+            {% if itens %}
+                <br><table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Valor</th>
+                            <th>Quantidade</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in itens %}
+                        <tr>
+                            <td><a href="{% url 'itemvenda-update' item.id %}">{{item.produto.descricao}}</a></td>
+                            <td>R$ {{item.produto.valorvenda}}</td>
+                            <td>{{item.qtde}}</td>
+                            <td><a href="{% url 'itemvenda-delete' item.id %}"><i class="bi bi-trash"></i></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+        <br>
+        <a class="btn btn-danger" href="#" role="button">Cancelar</a>
+        <a href="{% url 'finalizar_venda' venda.id %}" class="btn btn-secondary float-end">Finalizar venda</a>
+    {% endif %}
+{% endblock %}

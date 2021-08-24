@@ -1,0 +1,38 @@
+{% extends 'home.html' %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Pagamentos</li>
+{% endblock %}
+
+{% block content %}
+    <h3>Lista de pagamentos</h3>
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th scope="col">Data</th>
+                <th scope="col">Nota fiscal</th>
+                <th scope="col">Total</th>
+                <th scope="col">Nº de parcelas</th>
+                <th scope="col">Status</th>
+                <th scope="col">Fornecedor</th>
+                <th scope="col">Tipo de pagamento</th>
+                <th scope="col">Pagar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for compra in compras %}
+            <tr>
+                <td>{{compra.data}}</td>
+                <td>{{compra.nfiscal}}</td>
+                <td>{{compra.total}}</td>
+                <td>{{compra.nparcelas}}</td>
+                <td>{{compra.status}}</td>
+                <td>{{compra.fornecedor}}</td>
+                <td>{{compra.pagamento}}</td>
+                <td><a href="{% url 'pagamento-detail' compra.id %}">Pagamento</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

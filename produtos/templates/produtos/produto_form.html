@@ -1,0 +1,30 @@
+{% extends 'home.html' %}
+
+{% load bootstrap %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'produto-list' %}">Produtos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Cadastro</li>
+{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">{{form.descricao|bootstrap}}</div>
+            <div class="col-md-6"><b>ESTOQUE: </b><p>{{form.estoque.value}}</p></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">{{form.valorpago|bootstrap}}</div>
+            <div class="col-md-6">{{form.valorvenda|bootstrap}}</p></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">{{form.categoria|bootstrap}}</div>
+            <div class="col-md-6">{{form.und_medida|bootstrap}}</div>
+        </div>
+        <br>
+        <a class="btn btn-danger" href="{% url 'produto-list' %}" role="button">Cancelar</a>
+        <button type="submit" class="btn btn-primary float-end">Salvar</button>
+    </form>
+{% endblock %}

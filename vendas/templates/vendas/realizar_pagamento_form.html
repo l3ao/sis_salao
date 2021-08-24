@@ -1,0 +1,25 @@
+{% extends 'home.html' %}
+{% load bootstrap %}
+
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'recebimento-list' %}">Recebimentos</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'recebimento-detail' cliente_id %}">Parcelas</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Parcela</li>
+{% endblock %}
+
+{% block content %}
+    <h4>Pagamento</h4>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-3">{{form.valor|bootstrap}}</div>
+            <div class="col-md-3">{{form.data|bootstrap}}</div>
+            <div class="col-md-6">{{form.tipopagamento|bootstrap}}</div>
+        </div>
+        <br>
+        <a class="btn btn-danger" href="{% url 'recebimento-detail' cliente_id %}" role="button">Cancelar</a>
+        <button type="submit" class="btn btn-primary float-end">Finalizar</button>
+    </form>
+{% endblock %}

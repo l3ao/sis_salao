@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+    <title>{% block title %}Salão de estetica{% endblock %}</title>
+<body>
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{% url 'home' %}">Rose depilações</a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="{% url 'logout' %}">Sair</a>
+            </li>
+        </ul>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                {% block sidebarmenu %}{% endblock %}
+            </nav>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="pt-3 mb-3">
+                    <div class="btn-group me-2">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                {% block sidebar %}
+                                    <li class="breadcrumb-item active" aria-current="page">Home</li>
+                                {% endblock %}
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="float-end">
+                        {% block botao_novo %}{% endblock %}
+                    </div>
+                    <div class="float-end mx-sm-3">
+                        {% block pesquisar %}{% endblock %}
+                    </div>
+                </div>
+                <div class="">
+                    {% block content %}{% endblock %}
+                </div>
+                <nav class="col-md-9 ms-sm-auto col-lg-10 px-md-4 navbar fixed-bottom navbar-light bg-light">
+                    <div class="container-fluid">
+                        Sistema de Informação Leandro Chaves Ltda ®. Todos os direitos reservados ©. 2021
+                    </div>
+                </nav>
+            </main>
+        </div>
+    </div>
+</body>
+    <script src="{% static 'js/jquery.bundle.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/jquery.mask.js' %}" type="text/javascript"></script>
+    {% block extra_js %}{% endblock %}
+</html>

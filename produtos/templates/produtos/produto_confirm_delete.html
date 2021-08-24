@@ -1,0 +1,23 @@
+{% extends 'home.html' %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'produto-list' %}">Produtos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Delete</li>
+{% endblock %}
+
+{% block titulotela %}
+    Delete
+{% endblock %}
+
+{% block titulo %}
+    Produto
+{% endblock %}
+
+{% block content %}
+<h3>Você realmente deseja deletar o produto: {{produto}}?</h3>
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Confirmar</button>
+</form>
+{% endblock %}

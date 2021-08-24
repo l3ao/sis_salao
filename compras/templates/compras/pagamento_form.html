@@ -1,0 +1,39 @@
+{% extends 'home.html' %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'pagamento-list' %}">Pagamentos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Pagamento: {{compra.id}}</li>
+{% endblock %}
+
+{% block content %}
+    <form>
+        <label for="fornecedor">Fornecedor: </label>
+        <input id="fornecedor" type="text" name="fornecedor" value="{{ compra.fornecedor }}">
+        <label for="data">Data: </label>
+        <input id="data" type="text" name="data" value="{{ compra.data }}">
+        <label for="total">Total: </label>
+        <input id="total" type="text" name="total" value="{{ compra.total }}">
+        <input type="submit" value="OK">
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Valor</th>
+                <th scope="col">Data de pagamento</th>
+                <th scope="col">Data de vencimento</th>
+                <th>Pagar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for parc in parc_compra %}
+            <tr>
+                <td>{{parc.valor}}</td>
+                <td>{{parc.datapagto}}</td>
+                <td>{{parc.datavecto}}</td>
+                <td><a href="{% url 'pagar-parc_compra' parc.id %}">Pagar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
