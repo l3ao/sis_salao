@@ -14,7 +14,7 @@
         {% csrf_token %}
         <div class="row">
             <div class="col-md-3">{{form.sigla|bootstrap}}</div>
-            <div class="col-md-9">{{form.nome|bootstrap}}</div>
+            <div class="col-md-9">{{form.descricao|bootstrap}}</div>
         </div>
         <br>
         <a class="btn btn-danger" href="{% url 'categoria-list' %}" role="button">Cancelar</a>

@@ -4,22 +4,23 @@ from django.db import models
 # Create your models here.
 class Categoria(models.Model):
     sigla = models.CharField(verbose_name='Sigla', max_length=2, blank=True, null=True)
-    nome = models.CharField(max_length=50)
+    descricao = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.nome
+        return self.descricao
 
 
 class UnidMedida(models.Model):
     sigla = models.CharField(verbose_name='Sigla', max_length=2, blank=True, null=True)
-    nome = models.CharField(max_length=50)
+    descricao = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.nome
+        return self.descricao
 
 
 class Produto(models.Model):
     descricao = models.CharField(max_length=100)
+    desc_nf = models.CharField(max_length=100, null=True, blank=True)
     valorpago = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     valorvenda = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     estoque = models.IntegerField(default=0)

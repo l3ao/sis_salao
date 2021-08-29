@@ -1,10 +1,10 @@
 from django.core import paginator
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View, FormView
 from django.core.paginator import Paginator
 from .models import Produto, Categoria, UnidMedida
-from .forms import ProdutoForm
+from .forms import ProdutoForm, CategoriaForm, UnidMedidaForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
@@ -76,14 +76,16 @@ class CategoriaList(ListView):
 @method_decorator(login_required, name='dispatch')
 class CategoriaCreate(CreateView):
     model = Categoria
-    fields = ['sigla', 'nome']
+    form_class = CategoriaForm
+    template_name = 'produtos/categoria_form.html'
     success_url = reverse_lazy('categoria-list')
 
 
 @method_decorator(login_required, name='dispatch')
 class CategoriaUpdate(UpdateView):
     model = Categoria
-    fields = ['sigla', 'nome']
+    form_class = CategoriaForm
+    template_name = 'produtos/categoria_form.html'
     success_url = reverse_lazy('categoria-list')
 
 

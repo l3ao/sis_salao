@@ -19,7 +19,7 @@
             {% for categoria in categorias %}
             <tr>
                 <td><a href="{% url 'categoria-update' categoria.id %}">{{categoria.sigla}}</a></td>
-                <td>{{categoria.nome}}</td>
+                <td>{{categoria.descricao}}</td>
                 <td style="text-align: center;"><a href="{% url 'categoria-delete' categoria.id %}"><i class="bi bi-trash"></i></a></td>
             </tr>
             {% endfor %}

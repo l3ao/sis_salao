@@ -124,7 +124,7 @@ USE_L10N = False
 USE_TZ = True
 
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
@@ -134,7 +134,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-# STATIC_URL = '/home/leandrochaves/Documentos/projetos/gestao_salao/static/'
+STATIC_URL = '/home/leandrochaves/Documentos/projetos/gestao_salao/static/'
 
 # STATICFILES_DIRS = (
 #    '/home/leandrochaves/Documentos/projetos/gestao_salao/static/',

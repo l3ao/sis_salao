@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'home.html' %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
@@ -11,6 +11,8 @@
     <h1>Você tem certeza que desejar apagar a fornecedor: {{fornecedor.rsocial}}?</h1>
     <form method="POST">
         {% csrf_token %}
-        <button type="submit" class="btn btn-primary">Confirmar</button>
+        <br>
+        <a class="btn btn-danger" href="{% url 'fornecedor-list' %}" role="button">Cancelar</a>
+        <button type="submit" class="btn btn-primary float-end">Confirmar</button>
     </form>
 {% endblock %}

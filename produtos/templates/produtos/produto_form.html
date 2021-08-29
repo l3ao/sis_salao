@@ -12,19 +12,38 @@
     <form method="POST">
         {% csrf_token %}
         <div class="row">
+            <div class="col-md-6">{{form.desc_nf|bootstrap}}</div>
             <div class="col-md-6">{{form.descricao|bootstrap}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">{{form.categoria|bootstrap}}</div>
+            <div class="col-md-4">{{form.und_medida|bootstrap}}</div>
+            <div class="col-md-2">{{form.valorpago|bootstrap}}</div>
+            <div class="col-md-2">{{form.valorvenda|bootstrap}}</p></div>
+        </div>
+        <div class="row">
             <div class="col-md-6"><b>ESTOQUE: </b><p>{{form.estoque.value}}</p></div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">{{form.valorpago|bootstrap}}</div>
-            <div class="col-md-6">{{form.valorvenda|bootstrap}}</p></div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">{{form.categoria|bootstrap}}</div>
-            <div class="col-md-6">{{form.und_medida|bootstrap}}</div>
         </div>
         <br>
         <a class="btn btn-danger" href="{% url 'produto-list' %}" role="button">Cancelar</a>
         <button type="submit" class="btn btn-primary float-end">Salvar</button>
     </form>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#id_valorpago").inputmask('decimal', {
+                        'alias': 'numeric',
+                        'groupSeparator': ',',
+                        'autoGroup': true,
+                        'digits': 2,
+                        'radixPoint': ".",
+                        'digitsOptional': false,
+                        'allowMinus': false,
+                        'prefix': 'R$ ',
+                        'placeholder': ''
+            });
+        });
+    </script>
 {% endblock %}

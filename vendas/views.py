@@ -157,12 +157,12 @@ class ItemVendaDelete(View):
         item.delete()
         return redirect('venda-updade', venda=venda_id)
 
+
 @method_decorator(login_required, name='dispatch')
 class FinalizarVendaView(View):
     def get(self, request, venda):
         venda = Venda.objects.get(id=venda)
-        venda.mov_estoque()
-        venda.gerar_recebimento()
+        venda.finalizar()
         return redirect('venda-list')
 
 
