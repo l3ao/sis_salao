@@ -14,7 +14,7 @@
         {% csrf_token %}
         <div class="row">
             <div class="col-md-3">{{form.sigla|bootstrap}}</div>
-            <div class="col-md-9">{{form.nome|bootstrap}}</p></div>
+            <div class="col-md-9">{{form.descricao|bootstrap}}</p></div>
         </div>
         <a class="btn btn-danger" href="{% url 'tipopagamento-list' %}" role="button">Cancelar</a>
         <button type="submit" class="btn btn-primary float-end">Salvar</button>

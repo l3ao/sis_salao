@@ -92,3 +92,12 @@
         </ul>
     </div>
 {% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $('.nav-link').click(function() {
+            let test = $( this ).get(0);
+            test;
+          });
+    </script>
+{% endblock %}

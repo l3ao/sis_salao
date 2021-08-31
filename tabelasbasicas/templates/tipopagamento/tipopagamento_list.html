@@ -19,7 +19,7 @@
             {% for pagamento in object_list %}
             <tr>
                 <td><a href="{% url 'tipopagamento-update' pagamento.id %}">{{pagamento.sigla}}</a></td>
-                <td>{{pagamento.nome}}</td>
+                <td>{{pagamento.descricao}}</td>
                 <td style="text-align: center;"><a href="{% url 'tipopagamento-delete' pagamento.id %}"><i class="bi bi-trash"></i></a></td>
             </tr>
             {% endfor %}

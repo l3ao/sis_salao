@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'notas_servicos',
     'fornecedores',
     'compras',
+    'tabelasbasicas',
 ]
 
 MIDDLEWARE = [
