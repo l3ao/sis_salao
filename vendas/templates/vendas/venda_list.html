@@ -6,6 +6,36 @@
 {% endblock %}
 
 {% block content %}
+    <!-- <h3>Vendas</h3> -->
+
+    {% if vendas_abertas %}
+    <h5>Vendas em aberto</h3>
+    <table class="table table-striped table-sm" style="text-align: center;">
+        <thead>
+            <tr>
+                <th scope="col">Número da venda</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Data</th>
+                <th scope="col">Nº de parcelas</th>
+                <th scope="col">Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for venda in vendas_abertas %}
+            <tr>
+                <td><a href="{% url 'venda-updade' venda.id %}">{{venda.num_venda}}</a></td>
+                <td>{{venda.cliente}}</td>
+                <td>{{venda.data_criacao|date:"d M, Y"}}</td>
+                <td>{{venda.nparcelas}}</td>
+                <td>R$ {{venda.total}}</td>
+                <td><a href="{% url 'venda-delete' venda.id %}"><i class="bi bi-trash"></i></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table><br><br>
+    {% endif %}
+
     <h3>Vendas</h3>
     <table class="table table-striped table-sm" style="text-align: center;">
         <thead>
