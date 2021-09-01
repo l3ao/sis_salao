@@ -4,18 +4,11 @@ from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
 from fornecedores.models import Fornecedor
 from produtos.models import Produto
+from tabelasbasicas.models import TipoPagamento
 import datetime
 
 
 # Create your models here.
-class TipoPagamento(models.Model):
-    sigla = models.CharField(verbose_name='Sigla', max_length=3, blank=True, null=True)
-    nome = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.nome
-
-
 class Compra(models.Model):
     num_compra = models.CharField(verbose_name='Número', blank=True, null=True, max_length=10)
     nfiscal = models.IntegerField(verbose_name='Número NF-e')

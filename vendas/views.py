@@ -19,6 +19,17 @@ class VendaView(ListView):
     context_object_name = 'vendas'
     ordering = '-num_venda'
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(status=2)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        vendas_abertas = Venda.objects.filter(status=1)
+        context['vendas_abertas'] = vendas_abertas
+        return context
+
 
 @method_decorator(login_required, name='dispatch')
 class VendaCreate(View):
@@ -36,7 +47,8 @@ class VendaCreate(View):
             venda.cliente_id = request.POST['cliente']
             venda.save()
         else:
-            num_venda = Venda.objects.count() + 1
+            vendas = Venda.objects.order_by('id').last()
+            num_venda = vendas.id + 1
             venda = Venda.objects.create(
                 num_venda=str(num_venda).zfill(5),
                 nparcelas=request.POST['nparcelas'],
@@ -157,12 +169,12 @@ class ItemVendaDelete(View):
         item.delete()
         return redirect('venda-updade', venda=venda_id)
 
+
 @method_decorator(login_required, name='dispatch')
 class FinalizarVendaView(View):
     def get(self, request, venda):
         venda = Venda.objects.get(id=venda)
-        venda.mov_estoque()
-        venda.gerar_recebimento()
+        venda.finalizar()
         return redirect('venda-list')
 
 

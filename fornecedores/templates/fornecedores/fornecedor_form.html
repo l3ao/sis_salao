@@ -39,3 +39,14 @@
         <button type="submit" class="btn btn-primary float-end">Salvar</button>
     </form>
 {% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function(){
+        $("#id_cnpj").mask("00.000.000/0000-00");
+        $("#id_fone").mask("(00) 0000-0000");
+        $("#id_cel").mask("(00) 00000-0000");
+        $("#id_cep").mask("00000-000");
+    });
+</script>
+{% endblock %}

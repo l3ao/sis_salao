@@ -9,31 +9,6 @@ from django.utils.decorators import method_decorator
 
 # Create your views here.
 @method_decorator(login_required, name='dispatch')
-class TipoPagamentoList(generic.ListView):
-    model = models.TipoPagamento
-
-
-@method_decorator(login_required, name='dispatch')
-class TipoPagamentoCreate(generic.CreateView):
-    model = models.TipoPagamento
-    fields = ['sigla', 'nome']
-    success_url = reverse_lazy('tipopagamento-list')
-
-
-@method_decorator(login_required, name='dispatch')
-class TipoPagamentoUpdate(generic.UpdateView):
-    model = models.TipoPagamento
-    fields = ['sigla', 'nome']
-    success_url = reverse_lazy('tipopagamento-list')
-
-
-@method_decorator(login_required, name='dispatch')
-class TipoPagamentoDelete(generic.DeleteView):
-    model = models.TipoPagamento
-    success_url = reverse_lazy('tipopagamento-list')
-
-
-@method_decorator(login_required, name='dispatch')
 class CompraList(generic.ListView):
     paginate_by = 10
     model = models.Compra

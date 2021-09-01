@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    <h3>Confirmar exclusão do tipo de pagamento: {{tipopagamento.nome}}</h3>
+    <h3>Confirmar exclusão do tipo de pagamento: {{tipopagamento.descricao}}</h3>
     <form method="POST">
         {% csrf_token %}
         <br>

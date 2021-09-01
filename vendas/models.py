@@ -10,12 +10,24 @@ from compras.models import TipoPagamento
 
 # Create your models here.
 class Venda(models.Model):
+    ABERTA = 1
+    FINALIZADA = 2
+
+    STATUS_VENDA = [
+        (ABERTA, 'Aberta'),
+        (FINALIZADA, 'Finalizada'),
+    ]
+
     num_venda = models.CharField(verbose_name='Número da venda',
         unique=True, max_length=10, blank=True, null=True)
     data_criacao = models.DateField(auto_now_add=True, blank=True, null=True)
     total = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     nparcelas = models.IntegerField(default=1)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    status = models.IntegerField(
+        choices=STATUS_VENDA,
+        default=ABERTA,
+    )
 
     class Meta:
         ordering = ['-data_criacao', 'cliente__nome']
@@ -27,6 +39,12 @@ class Venda(models.Model):
         )['tot_ped'] or 0
         self.total = tot
         Venda.objects.filter(id=self.id).update(total=tot)
+
+    def finalizar(self):
+        self.status = 2
+        self.save()
+        self.mov_estoque()
+        self.gerar_recebimento()
 
     def mov_estoque(self):
         itens = self.itemdavenda_set.all()

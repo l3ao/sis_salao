@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View
 from django.core.paginator import Paginator
-from .models import Produto, Categoria, UnidMedida
+from .models import Produto
 from .forms import ProdutoForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -65,55 +65,3 @@ class ProdutoUpdate(View):
 class ProdutoDelete(DeleteView):
     model = Produto
     success_url = reverse_lazy('produto-list')
-
-
-@method_decorator(login_required, name='dispatch')
-class CategoriaList(ListView):
-    model = Categoria
-    context_object_name = 'categorias'
-
-
-@method_decorator(login_required, name='dispatch')
-class CategoriaCreate(CreateView):
-    model = Categoria
-    fields = ['sigla', 'nome']
-    success_url = reverse_lazy('categoria-list')
-
-
-@method_decorator(login_required, name='dispatch')
-class CategoriaUpdate(UpdateView):
-    model = Categoria
-    fields = ['sigla', 'nome']
-    success_url = reverse_lazy('categoria-list')
-
-
-@method_decorator(login_required, name='dispatch')
-class CategoriaDelete(DeleteView):
-    model = Categoria
-    success_url = reverse_lazy('categoria-list')
-
-
-@method_decorator(login_required, name='dispatch')
-class UnidMedidaList(ListView):
-    model = UnidMedida
-    context_object_name = 'unidmedidas'
-
-
-@method_decorator(login_required, name='dispatch')
-class UnidMedidaCreate(CreateView):
-    model = UnidMedida
-    fields = ['sigla', 'nome']
-    success_url = reverse_lazy('unidmedida-list')
-
-
-@method_decorator(login_required, name='dispatch')
-class UnidMedidaUpdate(UpdateView):
-    model = UnidMedida
-    fields = ['sigla', 'nome']
-    success_url = reverse_lazy('unidmedida-list')
-
-
-@method_decorator(login_required, name='dispatch')
-class UnidMedidaDelete(DeleteView):
-    model = UnidMedida
-    success_url = reverse_lazy('unidmedida-list')

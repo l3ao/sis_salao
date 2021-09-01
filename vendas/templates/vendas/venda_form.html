@@ -20,7 +20,9 @@
             <br>
             <div class="row">
                 <div class="col-md-6"><b>Total: </b>R$ {{ venda.total|floatformat:2 }}</div>
-                <div class="col-md-6"><button type="submit" class="btn btn-primary float-end">Confirmar</button></div>
+                {% if not venda.id %}
+                    <div class="col-md-6"><button type="submit" class="btn btn-primary float-end">Confirmar</button></div>
+                {% endif %}
             </div>
         </form>
     </div>
@@ -69,7 +71,7 @@
             {% endif %}
         </div>
         <br>
-        <a class="btn btn-danger" href="#" role="button">Cancelar</a>
+        <a class="btn btn-danger" href="{% url 'venda-delete' venda.id %}" role="button">Cancelar</a>
         <a href="{% url 'finalizar_venda' venda.id %}" class="btn btn-secondary float-end">Finalizar venda</a>
     {% endif %}
 {% endblock %}

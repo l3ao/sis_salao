@@ -19,7 +19,7 @@
             {% for unidmedida in unidmedidas %}
             <tr>
                 <td><a href="{% url 'unidmedida-update' unidmedida.id %}">{{unidmedida.sigla}}</a></td>
-                <td>{{unidmedida.nome}}</td>
+                <td>{{unidmedida.descricao}}</td>
                 <td style="text-align: center;"><a href="{% url 'unidmedida-delete' unidmedida.id %}"><i class="bi bi-trash"></i></a></td>
             </tr>
             {% endfor %}

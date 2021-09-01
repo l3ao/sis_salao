@@ -2,10 +2,6 @@ from django.urls import path
 from compras import views
 
 urlpatterns = [
-    path('tipopagamento/', views.TipoPagamentoList.as_view(), name='tipopagamento-list'),
-    path('tipopagamento/add/', views.TipoPagamentoCreate.as_view(), name='tipopagamento-add'),
-    path('tipopagamento/<int:pk>/update', views.TipoPagamentoUpdate.as_view(), name='tipopagamento-update'),
-    path('tipopagamento/<int:pk>/delete', views.TipoPagamentoDelete.as_view(), name='tipopagamento-delete'),
     path('', views.CompraList.as_view(), name='compra-list'),
     path('compra/add/', views.CompraCreate.as_view(), name='compra-add'),
     path('compra/<int:compra>/update', views.CompraUpdate.as_view(), name='compra-update'),

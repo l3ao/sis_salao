@@ -1,7 +1,26 @@
 
 from django import forms
 from django.forms import ModelForm, DecimalField
-from .models import Produto
+from django.forms.fields import CharField
+from .models import Produto, Categoria, UnidMedida
+
+
+class CategoriaForm(ModelForm):
+    sigla = CharField(label='Sigla', required=True, max_length=2)
+    descricao = CharField(label='Descrição', required=True)
+
+    class Meta:
+        model = Categoria
+        fields = ['sigla', 'descricao']
+
+
+class UnidMedidaForm(ModelForm):
+    sigla = CharField(label='Sigla', required=True, max_length=2)
+    descricao = CharField(label='Descrição', required=True)
+
+    class Meta:
+        model = UnidMedida
+        fields = ['sigla', 'descricao']
 
 
 class ProdutoForm(ModelForm):
@@ -9,10 +28,12 @@ class ProdutoForm(ModelForm):
                             max_digits=10, decimal_places=2, min_value=0)
     valorvenda = DecimalField(label='Valor de venda', required=True,
                             max_digits=10, decimal_places=2, min_value=0)
+    desc_nf = CharField(label='Descrição da nota fiscal', required=True)
     class Meta:
         model = Produto
         fields = ['descricao', 'valorpago', 'valorvenda',
-                  'estoque', 'categoria', 'und_medida']
+                  'estoque', 'categoria', 'und_medida', 'desc_nf']
         labels = {
+            'descricao': 'Descrição de venda',
             'und_medida': 'Unidade de medida',
         }
