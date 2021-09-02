@@ -124,16 +124,14 @@ USE_L10N = False
 
 USE_TZ = True
 
-
-STATIC_URL = '/static/'
-
 STATIC_ROOT = BASE_DIR / "staticfiles"
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # STATIC_URL = '/home/leandrochaves/Documentos/projetos/gestao_salao/static/'
 
@@ -144,3 +142,5 @@ STATICFILES_DIRS = (
 LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/accounts/login'
+
+DISABLE_COLLECTSTATIC=1
