@@ -124,7 +124,8 @@ USE_L10N = False
 
 USE_TZ = True
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
@@ -133,14 +134,6 @@ STATICFILES_DIRS = (
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# STATIC_URL = '/home/leandrochaves/Documentos/projetos/gestao_salao/static/'
-
-# STATICFILES_DIRS = (
-#    '/home/leandrochaves/Documentos/projetos/gestao_salao/static/',
-# )
-
 LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/accounts/login'
-
-DISABLE_COLLECTSTATIC=1
