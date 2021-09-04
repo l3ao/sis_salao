@@ -32,18 +32,6 @@
 
 {% block extra_js %}
     <script type="text/javascript">
-        $(document).ready(function(){
-            $("#id_valorpago").inputmask('decimal', {
-                        'alias': 'numeric',
-                        'groupSeparator': ',',
-                        'autoGroup': true,
-                        'digits': 2,
-                        'radixPoint': ".",
-                        'digitsOptional': false,
-                        'allowMinus': false,
-                        'prefix': 'R$ ',
-                        'placeholder': ''
-            });
-        });
+
     </script>
 {% endblock %}
