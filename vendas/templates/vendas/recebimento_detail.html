@@ -7,9 +7,13 @@
 {% endblock %}
 
 {% block content %}
-    <h4>Cliente: {{recebimento.venda__cliente__nome}}</h4>
+    <h4>Cliente: {{cliente.nome}}</h4>
+    {% if recebimento %}
     <h5>Parcelas</h5>
     <h3>R$ {{recebimento.total|floatformat:2}}</h3>
+    {% else %}
+    <h3>Saldo quitado.</h3>
+    {% endif %}
     <table class="table table-striped table-sm" style="text-align: center;">
         <thead>
             <tr>
@@ -47,5 +51,8 @@
 {% endblock %}
 
 {% block botao_novo %}
-    <a class="btn btn-primary" href="{% url 'realizar-pagamento' recebimento.venda__cliente_id %}" role="button">Realizar pagamento</a>
+    <a class="btn btn-danger" href="{% url 'recebimento-list' %}">Voltar para listagem</a>
+    {% if recebimento %}
+    <a class="btn btn-primary" href="{% url 'realizar-pagamento' recebimento.venda__cliente_id %}" role="button">Realizar pagamento</a>   
+    {% endif %}
 {% endblock %}

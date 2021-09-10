@@ -8,7 +8,7 @@ from .views import (
 urlpatterns = [
     path('', VendaView.as_view(), name='venda-list'),
     path('add/', VendaCreate.as_view(), name='venda-add'),
-    path('venda/<int:venda>', VendaUpdate.as_view(), name='venda-updade'),
+    path('venda/<int:venda>', VendaUpdate.as_view(), name='venda-update'),
     path('venda/<int:venda>/delete', VendaDelete.as_view(), name='venda-delete'),
     path('add-item/<int:venda>', ItemVendaCreate.as_view(), name='itemvenda-add'),
     path('item/<int:itemvenda>', ItemVendaUpdate.as_view(), name='itemvenda-update'),

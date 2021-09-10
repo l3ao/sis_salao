@@ -21,7 +21,7 @@ class Venda(models.Model):
     num_venda = models.CharField(verbose_name='Número da venda',
         unique=True, max_length=10, blank=True, null=True)
     data_criacao = models.DateField(auto_now_add=True, blank=True, null=True)
-    total = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    total = models.DecimalField(max_digits=9, decimal_places=2, default=0)
     nparcelas = models.IntegerField(default=1)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     status = models.IntegerField(

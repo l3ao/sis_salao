@@ -136,10 +136,8 @@ class ItemVendaCreate(View):
 class ItemVendaUpdate(View):
     def get(self, request, itemvenda):
         data = {}
-
         item = ItemDaVenda.objects.get(id=itemvenda)
         form = ItemDaVendaForm(instance=item)
-
         data['item'] = item
         data['form'] = form
 
@@ -149,12 +147,30 @@ class ItemVendaUpdate(View):
     def post(self, request, itemvenda):
         item = ItemDaVenda.objects.get(id=itemvenda)
         produto = Produto.objects.get(id=request.POST['produto'])
+        data = {}
+        mensagem = ''
+        # verifica produto
+        if item.produto.id != produto.id:
+            if ItemDaVenda.objects.filter(venda=item.venda, produto=produto).exists():
+                mensagem = 'Produto já está cadastrado'
+        # verifica estoque
+        if not mensagem:
+            estoque = produto.estoque - int(request.POST['qtde'])
+            if estoque < 0:
+                mensagem = f'Produto tem estoque atual de: 0{str(produto.estoque)}'
+        
+        if mensagem:
+            form = ItemDaVendaForm(instance=item)
+            data['item'] = item
+            data['form'] = form
+            data['mensagem'] = mensagem
+            return render(request, 'vendas/itemvenda_form.html', data)
+
         item.qtde = request.POST['qtde']
         item.valor = produto.valorvenda
         item.produto_id = request.POST['produto']
-
         item.save()
-        return redirect('venda-updade', venda=item.venda_id)
+        return redirect('venda-update', venda=item.venda_id)
 
 
 @method_decorator(login_required, name='dispatch')
@@ -167,15 +183,38 @@ class ItemVendaDelete(View):
         item = ItemDaVenda.objects.get(id=itemvenda)
         venda_id = item.venda_id
         item.delete()
-        return redirect('venda-updade', venda=venda_id)
+        return redirect('venda-update', venda=venda_id)
 
 
 @method_decorator(login_required, name='dispatch')
 class FinalizarVendaView(View):
     def get(self, request, venda):
         venda = Venda.objects.get(id=venda)
-        venda.finalizar()
-        return redirect('venda-list')
+        # verificar estoque
+        mensagem = ''
+        itens = venda.itemdavenda_set.all()
+        for item in itens:
+            produto = Produto.objects.get(id=item.produto.id)
+            estoque = produto.estoque - item.qtde
+            if estoque < 0:
+                mensagem = f'{produto.descricao} tem estoque atual de: 0{str(produto.estoque)}'
+                break
+
+        if mensagem:
+            data = {}
+            itens = venda.itemdavenda_set.all()
+            form_venda = VendaForm(instance=venda)
+            form_item = ItemDaVendaForm()
+
+            data['venda'] = venda
+            data['itens'] = venda.itemdavenda_set.all()
+            data['form_venda'] = form_venda
+            data['form_item'] = form_item
+            data['mensagem'] = mensagem
+            return render(request, 'vendas/venda_form.html', data)
+        else:
+            venda.finalizar()
+            return redirect('venda-list')
 
 
 @method_decorator(login_required, name='dispatch')
@@ -188,10 +227,17 @@ class RecebimentoList(View):
 @method_decorator(login_required, name='dispatch')
 class RecebimentoDetail(View):
     def get(self, request, cliente):
-        parcelas = ParcelaVenda.objects.filter(venda__cliente_id=cliente).order_by('-datapagto', 'datavecto')
-        recebimento = ParcelaVenda.objects.values('venda__cliente__nome', 'venda__cliente_id').annotate(qt_parcelas=Count('id'), total=Sum('valor')).filter(venda__cliente_id=cliente, status__in=['AV', 'VD'])
-        return render(request, 'vendas/recebimento_detail.html',
-            {'parcelas': parcelas, 'recebimento': recebimento[0]})
+        data = {}
+        data['cliente'] = Cliente.objects.get(id=cliente)
+        data['parcelas'] = ParcelaVenda.objects \
+            .filter(venda__cliente_id=cliente) \
+            .order_by('-datapagto', 'datavecto')
+        recebimento = ParcelaVenda.objects.values('venda__cliente__nome', 'venda__cliente_id') \
+            .annotate(qt_parcelas=Count('id'), total=Sum('valor')) \
+            .filter(venda__cliente_id=cliente, status__in=['AV', 'VD'])
+        if recebimento.exists():
+            data['recebimento'] = recebimento[0]
+        return render(request, 'vendas/recebimento_detail.html', data)
 
 
 @method_decorator(login_required, name='dispatch')

@@ -28,6 +28,25 @@
             {% endfor %}
         </tbody>
     </table>
+    <div class="pagination" style="padding-top: 20px; padding-bottom: 50px;">
+        <span class="step-links" style="position: relative; margin-left: auto; margin-right: auto;">
+            {% if lista_clientes.has_previous %}
+            <a href="?page=1" class="btn btn-outline-secondary btn-sm">&laquo; Primeiro</a>
+            <a href="?page={{ lista_clientes.previous_page_number }}" class="btn btn-outline-primary btn-sm">Anterior</a>
+            {% endif %}
+    
+            {% if lista_clientes.number %}
+            <span class="current">
+                Pagina {{ lista_clientes.number }} de {{ lista_clientes.paginator.num_pages }}.
+            </span>
+            {% endif %}
+    
+            {% if lista_clientes.has_next %}
+            <a href="?page={{ lista_clientes.next_page_number }}" class="btn btn-outline-primary btn-sm">Próxima</a>
+            <a href="?page={{ lista_clientes.paginator.num_pages }} " class="btn btn-outline-secondary btn-sm">Última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 {% endblock %}
 {% block botao_novo %}
     <a class="btn btn-primary" href="{% url 'cliente-add' %}" role="button">Novo cliente</a>

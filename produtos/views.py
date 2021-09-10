@@ -16,13 +16,13 @@ class ProdutoList(ListView):
     context_object_name = 'produtos'
 
     def get(self, request, *args, **kwargs):
-        # super().get(request, *args, **kwargs)
+        super().get(request, *args, **kwargs)
         termo_busca = request.GET.get('pesquisa', None)
         if termo_busca:
             produtos = Produto.objects.filter(descricao__icontains=termo_busca)
         else:
             produtos_list = Produto.objects.all()
-            paginator = Paginator(produtos_list, 15)
+            paginator = Paginator(produtos_list, 12)
             page = request.GET.get('page')
             produtos = paginator.get_page(page)
         return render(request, 'produtos/produto_list.html', {'produtos': produtos})

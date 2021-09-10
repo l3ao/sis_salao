@@ -24,7 +24,7 @@
         <tbody>
             {% for venda in vendas_abertas %}
             <tr>
-                <td><a href="{% url 'venda-updade' venda.id %}">{{venda.num_venda}}</a></td>
+                <td><a href="{% url 'venda-update' venda.id %}">{{venda.num_venda}}</a></td>
                 <td>{{venda.cliente}}</td>
                 <td>{{venda.data_criacao|date:"d M, Y"}}</td>
                 <td>{{venda.nparcelas}}</td>

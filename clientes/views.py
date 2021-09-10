@@ -3,8 +3,10 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.core.paginator import Paginator
 from .models import Cliente
 from .forms import ClienteForm
+
 
 # Create your views here.
 @method_decorator(login_required, name='dispatch')
@@ -16,6 +18,18 @@ class ClienteListView(ListView):
         context = super().get_context_data(**kwargs)
         context['active'] = 'active'
         return context
+
+    def get(self, request, *args, **kwargs):
+        super().get(request, *args, **kwargs)
+        termo_busca = request.GET.get('pesquisa', None)
+        if termo_busca:
+            clientes = Cliente.objects.filter(nome__icontains=termo_busca)
+        else:
+            clientes_list = Cliente.objects.all()
+            paginator = Paginator(clientes_list, 12)
+            page = request.GET.get('page')
+            clientes = paginator.get_page(page)
+        return render(request, 'clientes/cliente_list.html', {'lista_clientes': clientes})
 
 
 @method_decorator(login_required, name='dispatch')

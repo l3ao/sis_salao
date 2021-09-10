@@ -3,7 +3,7 @@
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
     <li class="breadcrumb-item"><a href="{% url 'venda-list' %}">Vendas</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'venda-updade' item.venda_id %}">Venda {{item.venda}}</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'venda-update' item.venda_id %}">Venda {{item.venda}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Item da venda - Delete</li>
 {% endblock %}
 
