@@ -4,10 +4,10 @@ from django.db import models
 class Fornecedor(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
     rsocial = models.CharField(max_length=50, default='')
-    ie = models.CharField(max_length=10, blank=True, null=True)
+    ie = models.CharField(max_length=20, blank=True, null=True)
     cnpj = models.CharField(max_length=15, default='')
-    cep = models.CharField(max_length=10, blank=True, null=True)
-    endereco = models.CharField(max_length=50, blank=True, null=True)
+    cep = models.CharField(max_length=20, blank=True, null=True)
+    endereco = models.CharField(max_length=100, blank=True, null=True)
     bairro = models.CharField(max_length=20, blank=True, null=True)
     fone = models.CharField(max_length=20, blank=True, null=True)
     cel = models.CharField(max_length=20, blank=True, null=True)
