@@ -5,7 +5,7 @@ class Fornecedor(models.Model):
     nome = models.CharField(max_length=50, blank=True, null=True)
     rsocial = models.CharField(max_length=50, default='')
     ie = models.CharField(max_length=20, blank=True, null=True)
-    cnpj = models.CharField(max_length=15, default='')
+    cnpj = models.CharField(max_length=20, default='')
     cep = models.CharField(max_length=20, blank=True, null=True)
     endereco = models.CharField(max_length=100, blank=True, null=True)
     bairro = models.CharField(max_length=20, blank=True, null=True)
