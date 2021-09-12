@@ -6,53 +6,9 @@ from tabelasbasicas.models import Categoria, UnidMedida, TipoPagamento
 from produtos.models import Produto
 
 
-def import_db():
-    # tabelas de pessoas (cliente e fornecedor)
+def importar_tabelasbasicas():
+    # tabelas básicas (categorias, unidades de medidas, tipos de pagamento)
     try:
-        clientes = carregar_json(settings.BASE_DIR / 'importacao/json/clientes.json')
-        for cliente in clientes:
-            exists_cli = Cliente.objects.filter(nome=cliente['nome']).exists()
-            if not exists_cli:
-                Cliente.objects.create(
-                    nome = cliente['nome'],
-                    data_nasc = cliente['data_nasc'] if cliente['data_nasc'] != "None" else None,
-                    telefone = cliente['telefone'],
-                    endereco = cliente['endereco'],
-                )
-        print('Clientes cadastrados..')
-
-        fornecedores = carregar_json(settings.BASE_DIR / 'importacao/json/fornecedores.json')
-        for fornecedor in fornecedores:
-            exists_fornec = Fornecedor.objects.filter(nome=fornecedor['nome']).exists()
-            if not exists_fornec:
-                Fornecedor.objects.create(
-                    nome = fornecedor['nome'],
-                    rsocial = fornecedor['rsocial'],
-                    ie = fornecedor['ie'],
-                    cnpj = fornecedor['cnpj'],
-                    cep = fornecedor['cep'],
-                    endereco = fornecedor['endereco'],
-                    bairro = fornecedor['bairro'],
-                    fone = fornecedor['fone'],
-                    cel = fornecedor['cel'],
-                    email = fornecedor['email'],
-                    endnumero = fornecedor['endnumero'],
-                    cidade = fornecedor['cidade'],
-                    estado = fornecedor['estado']
-                )
-        print('Fornecedores cadastrados..')
-
-        # tabelas básicas (categorias, unidades de medidas, tipos de pagamento)
-        categorias = carregar_json(settings.BASE_DIR / 'importacao/json/categoria.json')
-        for categoria in categorias:
-            exists_categ = Categoria.objects.filter(descricao=categoria['descricao'])
-            if not exists_categ:
-                Categoria.objects.create(
-                    sigla=categoria['sigla'],
-                    descricao=categoria['descricao'],
-                )
-        print('Categorias cadastradas..')
-
         unidmedidas = carregar_json(settings.BASE_DIR / 'importacao/json/unidmedida.json')
         for unidade in unidmedidas:
             exists_unid = UnidMedida.objects.filter(descricao=unidade['descricao'])
@@ -62,7 +18,10 @@ def import_db():
                     descricao=unidade['descricao'],
                 )
         print('Unidade de medidas cadastradas..')
+    except Exception as e:
+        raise Exception(e)
 
+    try:
         tipospagamento = carregar_json(settings.BASE_DIR / 'importacao/json/tipopagamento.json')
         for pagamento in tipospagamento:
             exists_pagamento = TipoPagamento.objects.filter(descricao=pagamento['descricao'])
@@ -72,8 +31,26 @@ def import_db():
                     descricao=pagamento['descricao'],
                 )
         print('Tipos de pagamento cadastrados..')
+    except Exception as e:
+        raise Exception(e)
 
-        # produtos
+    try:
+        categorias = carregar_json(settings.BASE_DIR / 'importacao/json/categoria.json')
+        for categoria in categorias:
+            exists_categ = Categoria.objects.filter(descricao=categoria['descricao'])
+            if not exists_categ:
+                Categoria.objects.create(
+                    sigla=categoria['sigla'],
+                    descricao=categoria['descricao'],
+                )
+        print('Categorias cadastradas..')
+    except Exception as e:
+        raise Exception(e)
+
+
+def importar_produtos():
+    # produtos
+    try:
         produtos = carregar_json(settings.BASE_DIR / 'importacao/json/produtos.json')
         for produto in produtos:
             exists_prod = Produto.objects.filter(desc_nf=produto['descricao'])
@@ -90,7 +67,50 @@ def import_db():
                     und_medida_id = id_und_medida,
                 )
         print('Produtos cadastrados..')
-        print('Importação finalizada.')
+    except Exception as e:
+        raise Exception(e)
+
+
+def importar_pessoas():
+    # tabelas de pessoas (cliente e fornecedor)
+    try:
+        clientes = carregar_json(settings.BASE_DIR / 'importacao/json/clientes.json')
+        for cliente in clientes:
+            exists_cli = Cliente.objects.filter(nome=cliente['nome']).exists()
+            if not exists_cli:
+                Cliente.objects.create(
+                    nome = cliente['nome'],
+                    data_nasc = cliente['data_nasc'] if cliente['data_nasc'] != "None" else None,
+                    telefone = cliente['telefone'],
+                    endereco = cliente['endereco'],
+                )
+        print('Clientes cadastrados..')
+    except Exception as e:
+        print(e)
+        raise Exception(e)
+
+    try:
+        fornecedores = carregar_json(settings.BASE_DIR / 'importacao/json/fornecedores.json')
+        for fornecedor in fornecedores:
+            exists_fornec = Fornecedor.objects.filter(nome=fornecedor['nome']).exists()
+            if not exists_fornec:
+                razaosocial = str(fornecedor['rsocial']).replace('.', '').replace('/', '').replace('-', '')
+                Fornecedor.objects.create(
+                    nome = fornecedor['nome'],
+                    rsocial = razaosocial,
+                    ie = fornecedor['ie'],
+                    cnpj = fornecedor['cnpj'],
+                    cep = fornecedor['cep'],
+                    endereco = fornecedor['endereco'],
+                    bairro = fornecedor['bairro'],
+                    fone = fornecedor['fone'],
+                    cel = fornecedor['cel'],
+                    email = fornecedor['email'],
+                    endnumero = fornecedor['endnumero'],
+                    cidade = fornecedor['cidade'],
+                    estado = fornecedor['estado']
+                )
+        print('Fornecedores cadastrados..')
     except Exception as e:
         print(e)
         raise Exception(e)
