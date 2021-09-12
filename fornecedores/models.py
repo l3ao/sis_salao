@@ -13,8 +13,8 @@ class Fornecedor(models.Model):
     cel = models.CharField(max_length=20, blank=True, null=True)
     email = models.CharField(max_length=20, blank=True, null=True)
     endnumero = models.CharField(max_length=20, blank=True, null=True)
-    cidade = models.CharField(max_length=20, blank=True, null=True)
-    estado = models.CharField(max_length=10, blank=True, null=True)
+    cidade = models.CharField(max_length=50, blank=True, null=True)
+    estado = models.CharField(max_length=20, blank=True, null=True)
 
     def __str__(self):
         return self.rsocial
