@@ -11,7 +11,7 @@ class Produto(models.Model):
     und_medida = models.ForeignKey(UnidMedida, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.descricao + ' - Estoque: ' + str(self.estoque)
+        return self.desc_nf + ' - Estoque: ' + str(self.estoque)
 
     class Meta:
         ordering = ['descricao']

@@ -4,6 +4,28 @@ from clientes.models import Cliente
 from fornecedores.models import Fornecedor
 from tabelasbasicas.models import Categoria, UnidMedida, TipoPagamento
 from produtos.models import Produto
+from vendas.models import Venda, ItemDaVenda, NegociacaoParcela, ParcelaVenda
+from compras.models import ParcelaCompra, ItemCompra, Compra
+
+
+# def clear_tables():
+#     Cliente.objects.all()
+#     Fornecedor.objects.all()
+#     Produto.objects.all()
+#     Categoria.objects.all()
+#     UnidMedida.objects.all()
+#     TipoPagamento.objects.all()
+    
+#     # vendas
+#     NegociacaoParcela.objects.all()
+#     ParcelaVenda.objects.all()
+#     ItemDaVenda.objects.all()
+#     Venda.objects.all()
+
+#     # compras
+#     ParcelaCompra.objects.all()
+#     ItemCompra.objects.all()
+#     Compra.objects.all()
 
 
 def importar_tabelasbasicas():

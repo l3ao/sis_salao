@@ -48,7 +48,7 @@ class VendaCreate(View):
             venda.save()
         else:
             vendas = Venda.objects.order_by('id').last()
-            num_venda = vendas.id + 1
+            num_venda = vendas.id + 1 if vendas else 1
             venda = Venda.objects.create(
                 num_venda=str(num_venda).zfill(5),
                 nparcelas=request.POST['nparcelas'],
@@ -108,18 +108,21 @@ class ItemVendaCreate(View):
         item = ItemDaVenda.objects.filter(
             venda_id=venda, produto_id=request.POST['produto'])
 
-        if item:
-            data['mensagem'] = 'Item já cadastrado.'
-            item = item[0]
-        if estoque < 0:
-            data['mensagem'] = 'Produto tem estoque atual de: 0{}'.format(produto.estoque)
-            venda = Venda.objects.get(id=venda)
+        mensagem = ''
+        if item.exists(): # existencia
+            mensagem = 'Item já cadastrado.'
+        elif estoque < 0: # verificar estoque
+            mensagem = 'Produto tem estoque atual de: 0{}'.format(produto.estoque)
+        
+        if mensagem:
+            venda = item[0].venda if item.exists() else Venda.objects.get(id=venda)
+            data['mensagem'] = mensagem
             data['venda'] = venda
             data['itens'] = venda.itemdavenda_set.all()
             data['form_venda'] = VendaForm(instance=venda)
             data['form_item'] = ItemDaVendaForm()
-        else:
-            produto = Produto.objects.get(id=request.POST['produto'])
+        
+        if not item.exists() and estoque >= 0:
             item = ItemDaVenda.objects.create(
                 qtde=request.POST['qtde'], valor=produto.valorvenda,
                 venda_id=venda, produto_id=request.POST['produto'],)
@@ -197,7 +200,7 @@ class FinalizarVendaView(View):
             produto = Produto.objects.get(id=item.produto.id)
             estoque = produto.estoque - item.qtde
             if estoque < 0:
-                mensagem = f'{produto.descricao} tem estoque atual de: 0{str(produto.estoque)}'
+                mensagem = f'{produto.desc_nf} tem estoque atual de: 0{str(produto.estoque)}'
                 break
 
         if mensagem:
