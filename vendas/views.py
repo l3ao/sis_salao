@@ -200,7 +200,7 @@ class FinalizarVendaView(View):
             produto = Produto.objects.get(id=item.produto.id)
             estoque = produto.estoque - item.qtde
             if estoque < 0:
-                mensagem = f'{produto.desc_nf} tem estoque atual de: 0{str(produto.estoque)}'
+                mensagem = f'{produto.descricao} tem estoque atual de: 0{str(produto.estoque)}'
                 break
 
         if mensagem:

@@ -12,8 +12,7 @@
     <form method="POST">
         {% csrf_token %}
         <div class="row">
-            <div class="col-md-6">{{form.desc_nf|bootstrap}}</div>
-            <div class="col-md-6">{{form.descricao|bootstrap}}</div>
+            <div class="col-md-12">{{form.descricao|bootstrap}}</div>
         </div>
         <div class="row">
             <div class="col-md-4">{{form.categoria|bootstrap}}</div>

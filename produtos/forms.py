@@ -28,12 +28,11 @@ class ProdutoForm(ModelForm):
                             max_digits=10, decimal_places=2, min_value=0)
     valorvenda = DecimalField(label='Valor de venda', required=True,
                             max_digits=10, decimal_places=2, min_value=0)
-    desc_nf = CharField(label='Descrição da nota fiscal', required=True)
+    descricao = CharField(label='Descrição do produto', required=True)
     class Meta:
         model = Produto
-        fields = ['descricao', 'valorpago', 'valorvenda',
-                  'estoque', 'categoria', 'und_medida', 'desc_nf']
+        fields = ['valorpago', 'valorvenda',
+                  'estoque', 'categoria', 'und_medida', 'descricao']
         labels = {
-            'descricao': 'Descrição de venda',
             'und_medida': 'Unidade de medida',
         }

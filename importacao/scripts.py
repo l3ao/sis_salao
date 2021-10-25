@@ -8,25 +8,31 @@ from vendas.models import Venda, ItemDaVenda, NegociacaoParcela, ParcelaVenda
 from compras.models import ParcelaCompra, ItemCompra, Compra
 
 
-# def clear_tables():
-#     Cliente.objects.all()
-#     Fornecedor.objects.all()
-#     Produto.objects.all()
-#     Categoria.objects.all()
-#     UnidMedida.objects.all()
-#     TipoPagamento.objects.all()
-    
-#     # vendas
-#     NegociacaoParcela.objects.all()
-#     ParcelaVenda.objects.all()
-#     ItemDaVenda.objects.all()
-#     Venda.objects.all()
+def clear_tables():
+    # vendas
+    NegociacaoParcela.objects.all().delete()
+    ParcelaVenda.objects.all().delete()
+    ItemDaVenda.objects.all().delete()
+    Venda.objects.all().delete()
 
-#     # compras
-#     ParcelaCompra.objects.all()
-#     ItemCompra.objects.all()
-#     Compra.objects.all()
+    # compras
+    ParcelaCompra.objects.all().delete()
+    ItemCompra.objects.all().delete()
+    Compra.objects.all().delete()
 
+    # tabelas básicas e de cadastro
+    Cliente.objects.all().delete()
+    Fornecedor.objects.all().delete()
+    Produto.objects.all().delete()
+    Categoria.objects.all().delete()
+    UnidMedida.objects.all().delete()
+    TipoPagamento.objects.all().delete()
+
+
+def importar_all():
+    importar_tabelasbasicas()
+    importar_produtos()
+    importar_pessoas()
 
 def importar_tabelasbasicas():
     # tabelas básicas (categorias, unidades de medidas, tipos de pagamento)
@@ -71,17 +77,16 @@ def importar_tabelasbasicas():
 
 
 def importar_produtos():
-    # produtos
+    # produtosfrom importacao.scripts import importar_all
     try:
         produtos = carregar_json(settings.BASE_DIR / 'importacao/json/produtos.json')
         for produto in produtos:
-            exists_prod = Produto.objects.filter(desc_nf=produto['descricao'])
+            exists_prod = Produto.objects.filter(descricao=produto['descricao'])
             if not exists_prod:
                 id_categoria = Categoria.objects.get(descricao=produto['categoria']).id
                 id_und_medida = UnidMedida.objects.get(descricao=produto['und_medida']).id
                 Produto.objects.create(
-                    descricao = 'DESCRIÇÃO DA VENDA',
-                    desc_nf = produto['descricao'],
+                    descricao = str(produto['descricao']).upper(),
                     valorpago = produto['valorpago'],
                     valorvenda = produto['valorvenda'],
                     # estoque = 0,

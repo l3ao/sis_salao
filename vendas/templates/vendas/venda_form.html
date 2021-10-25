@@ -60,7 +60,7 @@
                     <tbody>
                         {% for item in itens %}
                         <tr>
-                            <td><a href="{% url 'itemvenda-update' item.id %}">{{item.produto.desc_nf}}</a></td>
+                            <td><a href="{% url 'itemvenda-update' item.id %}">{{item.produto.descricao}}</a></td>
                             <td>R$ {{item.produto.valorvenda}}</td>
                             <td>{{item.qtde}}</td>
                             <td><a href="{% url 'itemvenda-delete' item.id %}"><i class="bi bi-trash"></i></a></td>

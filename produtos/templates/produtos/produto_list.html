@@ -39,7 +39,7 @@
         <tbody>
             {% for produto in produtos %}
             <tr>
-                <td><a href="{% url 'produto-update' produto.id %}">{{produto.desc_nf|truncatechars:43}}</a></td>
+                <td><a href="{% url 'produto-update' produto.id %}">{{produto.descricao|truncatechars:43}}</a></td>
                 <td>{{produto.categoria}}</td>
                 <td>R$ {{produto.valorpago}}</td>
                 <td>R$ {{produto.valorvenda}}</td>
