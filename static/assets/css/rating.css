@@ -1,5 +1,4 @@
 .antennaio {
-  background-image: url("${file-1x}");
   background-repeat: no-repeat;
   color: #cecece;
   width: 280px;
@@ -16,7 +15,6 @@
   transition: color  2s; }
   @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
     .antennaio {
-      background-image: url("${file-2x}");
       background-size: 60px 60px; } }
   .antennaio:hover {
     color: #757575; }
@@ -24,14 +22,12 @@
     padding: 0 0 0 70px; }
 
 .bars {
-  background-image: url("${file-1x}");
   width: 80px;
   height: 80px;
   display: block;
   margin: auto; }
   @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
     .bars {
-      background-image: url("${file-2x}");
       background-size: 80px 80px; } }
 
 .section-intro {

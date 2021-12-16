@@ -275,9 +275,6 @@ a.pswp__share--download:hover {
 .pswp__preloader--active {
   opacity: 1; }
 
-.pswp__preloader--active .pswp__preloader__icn {
-  background: url(preloader.gif) 0 0 no-repeat; }
-
 .pswp--css_animation .pswp__preloader--active {
   opacity: 1; }
 
