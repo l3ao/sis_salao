@@ -1,9 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'index.html' %}
 
 {% block sidebar %}
     <li class="breadcrumb-item active" aria-current="page">Home</li>
 {% endblock %}
-
+<!-- 
 {% block sidebarmenu %}
     <div class="position-sticky pt-3">
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -89,6 +89,12 @@
                     Recebimentos
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'notaservico-list' %}">
+                    <i class="bi bi-list-check"></i>
+                    Notas de serviços
+                </a>
+            </li>
         </ul>
     </div>
 {% endblock %}
@@ -100,4 +106,4 @@
             test;
           });
     </script>
-{% endblock %}
+{% endblock %} -->

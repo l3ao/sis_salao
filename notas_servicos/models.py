@@ -1,23 +1,19 @@
 from django.db import models
 from servicos.models import Servico
 from clientes.models import Cliente
-
+from tabelasbasicas.models import TipoPagamento
 
 # Create your models here.
 class NotaServico(models.Model):
-    descricao = models.CharField(max_length=50)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    pagamento = models.ForeignKey(TipoPagamento,
+        on_delete=models.CASCADE, blank=True, null=True)
+    servicos = models.ManyToManyField(Servico,
+        blank=True, null=True)
     data = models.DateTimeField()
-    desconto = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-    valor = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    valor = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    desconto = models.DecimalField(max_digits=5, decimal_places=2, default=0)    
 
     class Meta:
         ordering = ['-data', 'cliente__nome']
-
-
-class ItemNotaServico(models.Model):
-    notaservico = models.ForeignKey(NotaServico, on_delete=models.CASCADE)
-    servico = models.ForeignKey(Servico, on_delete=models.CASCADE)
-    quantidade = models.IntegerField(default=1)
-    desconto = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 

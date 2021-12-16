@@ -1,16 +1,20 @@
-{% extends 'home.html' %}
+{% extends 'crud/confirm_delete.html' %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'compra-list' %}">Compras</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'compra-list' %}">Listagem</a></li>
     <li class="breadcrumb-item"><a href="{% url 'compra-update' compra.id %}">Compra</a></li>
     <li class="breadcrumb-item active" aria-current="page">Excluir compra</li>
 {% endblock %}
+
+{% block nometela %}
+    Compra
+{% endblock nometela %}
 
 {% block content %}
     <form method="POST">
         <h1>Você realmente desejar excluir a compra: {{compra}}?</h1>
         {% csrf_token %}
-        <br><button type="submit" class="btn btn-primary">Confirmar</button>
+        <br><button type="submit" class="btn btn-primary float-end">Confirmar</button>
     </form>
 {% endblock %}

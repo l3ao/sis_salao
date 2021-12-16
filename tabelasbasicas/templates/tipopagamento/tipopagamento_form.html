@@ -1,21 +1,25 @@
-{% extends 'home.html' %}
+{% extends 'crud/form.html' %}
 
 {% load bootstrap %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'tipopagamento-list' %}">Tipos de pagamento</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'tipopagamento-list' %}">Listagem</a></li>
     <li class="breadcrumb-item active" aria-current="page">Cadastro</li>
 {% endblock %}
 
+{% block nometela %}
+    Tipo de pagamento
+{% endblock %}
+
 {% block content %}
-    <h3>Cadastro</h3>
     <form method="POST">
         {% csrf_token %}
         <div class="row">
             <div class="col-md-3">{{form.sigla|bootstrap}}</div>
             <div class="col-md-9">{{form.descricao|bootstrap}}</p></div>
         </div>
+        <br>
         <a class="btn btn-danger" href="{% url 'tipopagamento-list' %}" role="button">Cancelar</a>
         <button type="submit" class="btn btn-primary float-end">Salvar</button>
     </form>

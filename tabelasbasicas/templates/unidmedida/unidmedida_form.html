@@ -1,15 +1,18 @@
-{% extends 'home.html' %}
+{% extends 'crud/form.html' %}
 
 {% load bootstrap %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'unidmedida-list' %}">Unidades de medida</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'unidmedida-list' %}">Listagem</a></li>
     <li class="breadcrumb-item active" aria-current="page">Cadastro</li>
 {% endblock %}
 
+{% block nometela %}
+    Unidade de medida
+{% endblock %}
+
 {% block content %}
-    <h3>Cadastro</h3>
     <form method="POST">
         {% csrf_token %}        
         <div class="row">

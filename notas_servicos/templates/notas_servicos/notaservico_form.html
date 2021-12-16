@@ -1,0 +1,40 @@
+{% extends 'crud/form.html' %}
+
+{% load bootstrap %}
+
+{% block sidebar %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'notaservico-list' %}">Listagem</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Cadastro</li>
+{% endblock %}
+
+{% block nometela %}
+    Nota de serviço
+{% endblock %}
+
+{% block content %}
+    <form method="POST" style="overflow: hidden;">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">{{form.cliente|bootstrap}}</div>
+            <div class="col-md-6">{{form.pagamento|bootstrap}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">{{form.data|bootstrap}}</div>
+            <div class="col-md-4">{{form.valor|bootstrap}}</div>
+            <div class="col-md-4">{{form.desconto|bootstrap}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">{{form.servicos|bootstrap}}</div>
+        </div>
+        <br>
+        <a class="btn btn-danger" href="{% url 'notaservico-list' %}" role="button">Cancelar</a>
+        <button type="submit" class="btn btn-primary float-end">Salvar</button>
+    </form>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+
+    </script>
+{% endblock %}

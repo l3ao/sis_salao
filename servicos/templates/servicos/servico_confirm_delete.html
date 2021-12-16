@@ -1,9 +1,13 @@
-{% extends 'home.html' %}
+{% extends 'crud/confirm_delete.html' %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'servico-list' %}">Serviços</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'servico-list' %}">Listagem</a></li>
     <li class="breadcrumb-item active" aria-current="page">Excluir serviço</li>
+{% endblock %}
+
+{% block nometela %}
+    Serviço
 {% endblock %}
 
 {% block content %}

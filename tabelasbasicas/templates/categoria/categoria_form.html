@@ -1,11 +1,15 @@
-{% extends 'home.html' %}
+{% extends 'crud/form.html' %}
 
 {% load bootstrap %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'categoria-list' %}">Categorias</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'categoria-list' %}">Listagem</a></li>
     <li class="breadcrumb-item active" aria-current="page">Cadastro</li>
+{% endblock %}
+
+{% block nometela %}
+    Categorias
 {% endblock %}
 
 {% block content %}

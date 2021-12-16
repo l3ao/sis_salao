@@ -44,7 +44,7 @@ class ParcelaForm(ModelForm):
 
 class RealizarPagamentoForm(Form):
     valor = forms.DecimalField(label='Valor',
-        max_digits=5, decimal_places=2, initial=0, min_value=0)
+        max_digits=5, decimal_places=2, initial=0, min_value=1)
     data = forms.DateField(
         required=True,
         label='Data de pagamento',

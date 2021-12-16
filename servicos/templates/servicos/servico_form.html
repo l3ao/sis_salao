@@ -1,11 +1,15 @@
-{% extends 'home.html' %}
+{% extends 'crud/form.html' %}
 
 {% load bootstrap %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'servico-list' %}">Serviços</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Cadastro de serviço</li>
+    <li class="breadcrumb-item"><a href="{% url 'servico-list' %}">Listagem</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Cadastro</li>
+{% endblock %}
+
+{% block nometela %}
+    Serviço
 {% endblock %}
 
 {% block content %}
@@ -23,8 +27,6 @@
 
 {% block extra_js %}
     <script type="text/javascript">
-        $(function() {
-            $('#id_preco').maskMoney();
-          })
+        
     </script>
 {% endblock %}

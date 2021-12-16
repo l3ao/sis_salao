@@ -1,35 +1,32 @@
-{% extends 'home.html' %}
+{% extends 'crud/list.html' %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Pagamentos</li>
+    <li class="breadcrumb-item active" aria-current="page">Listagem</li>
+{% endblock %}
+
+{% block nometela %}
+    Pagamentos
 {% endblock %}
 
 {% block content %}
-    <h3>Lista de pagamentos</h3>
-    <table class="table table-striped table-sm">
+    <table class="table table-hover table-sm">
         <thead>
             <tr>
-                <th scope="col">Data</th>
-                <th scope="col">Nota fiscal</th>
-                <th scope="col">Total</th>
-                <th scope="col">Nº de parcelas</th>
-                <th scope="col">Status</th>
-                <th scope="col">Fornecedor</th>
-                <th scope="col">Tipo de pagamento</th>
-                <th scope="col">Pagar</th>
+                <th scope="col" style="width: 20%;">Data</th>
+                <th scope="col" style="width: 20%;">Nota fiscal</th>
+                <th scope="col" style="width: 20%;">Total</th>
+                <th scope="col" style="width: 20%;">Fornecedor</th>
+                <th scope="col" style="width: 20%;">Pagar</th>
             </tr>
         </thead>
         <tbody>
             {% for compra in compras %}
             <tr>
-                <td>{{compra.data}}</td>
-                <td>{{compra.nfiscal}}</td>
-                <td>{{compra.total}}</td>
-                <td>{{compra.nparcelas}}</td>
-                <td>{{compra.status}}</td>
-                <td>{{compra.fornecedor}}</td>
-                <td>{{compra.pagamento}}</td>
+                <td style="width: 20%;">{{compra.data}}</td>
+                <td style="width: 20%;">{{compra.total}}</td>
+                <td style="width: 20%;">{{compra.nparcelas}}</td>
+                <td style="width: 20%;">{{compra.fornecedor}}</td>
                 <td><a href="{% url 'pagamento-detail' compra.id %}">Pagamento</a></td>
             </tr>
             {% endfor %}

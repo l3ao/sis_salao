@@ -31,5 +31,6 @@ urlpatterns = [
     path('servicos/', include('servicos.urls')),
     path('fornecedores/', include('fornecedores.urls')),
     path('compras/', include('compras.urls')),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('notas-servicos/', include('notas_servicos.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,13 +1,16 @@
-{% extends 'home.html' %}
+{% extends 'crud/list.html' %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Compras</li>
+    <li class="breadcrumb-item active" aria-current="page">Listagem</li>
+{% endblock %}
+
+{% block nometela %}
+    Compras
 {% endblock %}
 
 {% block content %}
-    <h3>Notas de compras</h3>
-    <table class="table table-striped table-sm">
+    <table class="table table-hover table-sm">
         <thead>
             <tr>
                 <th scope="col">Número</th>
@@ -34,5 +37,5 @@
 {% endblock %}
 
 {% block botao_novo %}
-    <a href="{% url 'compra-add' %}" class="btn btn-primary">Nova nota de compra</a>
+    <a href="{% url 'compra-add' %}" class="btn btn-outline-primary">Nova nota de compra</a>
 {% endblock %}

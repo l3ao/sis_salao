@@ -1,16 +1,22 @@
-{% extends 'base.html' %}
+{% extends 'crud/confirm_delete.html' %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'venda-list' %}">Vendas</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'venda-update' item.venda_id %}">Venda {{item.venda}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Item da venda - Delete</li>
+    <li class="breadcrumb-item"><a href="{% url 'venda-list' %}">Listagem</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'venda-update' item.venda_id %}">Venda {{item.venda.num_venda}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Delete</li>
+{% endblock %}
+
+{% block nometela %}
+    Item da venda
 {% endblock %}
 
 {% block content %}
     <h3>Você realmente deseja apagar o item: {{item}}?</h3>
     <form method="POST">
         {% csrf_token %}
-        <br><button type="submit" class="btn btn-primary">Confirmar</button>
+        <br>
+        <a href="{% url 'venda-update' item.venda_id %}" class="btn btn-danger">Cancelar</a>
+        <button type="submit" class="btn btn-primary float-end">Confirmar</button>
     </form>
 {% endblock %}

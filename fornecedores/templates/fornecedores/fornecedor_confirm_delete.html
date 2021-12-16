@@ -1,10 +1,14 @@
-{% extends 'home.html' %}
+{% extends 'crud/confirm_delete.html' %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'fornecedor-list' %}">Fornecedores</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'fornecedor-list' %}">Listagem</a></li>
     <li class="breadcrumb-item"><a href="{% url 'fornecedor-update' fornecedor.id %}">Fornecedor {{fornecedor.rsocial}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Delete</li>
+{% endblock %}
+
+{% block nometela %}
+    Fornecedor
 {% endblock %}
 
 {% block content %}

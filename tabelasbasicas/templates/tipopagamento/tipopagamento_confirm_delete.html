@@ -1,8 +1,8 @@
-{% extends 'home.html' %}
+{% extends 'crud/confirm_delete.html' %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'tipopagamento-list' %}">Tipos de pagamento</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'tipopagamento-list' %}">Listagem</a></li>
     <li class="breadcrumb-item active" aria-current="page">Delete</li>
 {% endblock %}
 

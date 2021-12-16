@@ -1,8 +1,12 @@
-{% extends 'home.html' %}
+{% extends 'crud/list.html' %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Produtos</li>
+    <li class="breadcrumb-item active" aria-current="page">Listagem</li>
+{% endblock %}
+
+{% block nometela %}
+    Produtos
 {% endblock %}
 
 {% block pesquisar %}
@@ -25,32 +29,31 @@
 {% endblock %}
 
 {% block content %}
-    <table class="table table-striped table-sm">
+    <table class="table table-hover table-sm">
         <thead>
             <tr>
-                <th style="width:50%">Produto</th>
-                <th style="width:15%"">Categoria</th>
-                <th>Compra</th>
-                <th>Venda</th>
-                <th>Estoque</th>
-                <th>Unid. de medida</th>
+                <th style="width: 50%">Produto</th>
+                <th style="width: 10%"">Categoria</th>
+                <th style="width: 20%;">Compra</th>
+                <th style="width: 20%;">Venda</th>
+                <th style="width: 10%;">Estoque</th>
             </tr>
         </thead>
         <tbody>
             {% for produto in produtos %}
             <tr>
-                <td><a href="{% url 'produto-update' produto.id %}">{{produto.descricao|truncatechars:43}}</a></td>
+                <td><a href="{% url 'produto-update' produto.id %}">{{produto.descricao}}</a></td>
                 <td>{{produto.categoria}}</td>
                 <td>R$ {{produto.valorpago}}</td>
                 <td>R$ {{produto.valorvenda}}</td>
                 <td>{{produto.estoque}}</td>
-                <td>{{produto.und_medida}}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <div class="pagination" style="padding-top: 20px; padding-bottom: 50px;">
-        <span class="step-links" style="position: relative;">
+    <br>
+    <div class="pagination">
+        <span class="step-links" style="position: relative; margin-left: auto; margin-right: auto;">
             {% if produtos.has_previous %}
             <a href="?page=1" class="btn btn-outline-secondary btn-sm">&laquo; Primeiro</a>
             <a href="?page={{ produtos.previous_page_number }}" class="btn btn-outline-primary btn-sm">Anterior</a>

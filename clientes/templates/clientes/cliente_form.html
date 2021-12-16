@@ -1,11 +1,15 @@
-{% extends 'home.html' %}
+{% extends 'crud/form.html' %}
 
 {% load bootstrap %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'cliente-list' %}">Clientes</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'cliente-list' %}">Listagem</a></li>
     <li class="breadcrumb-item active" aria-current="page">Cadastro</li>
+{% endblock %}
+
+{% block nometela %}
+    Clientes
 {% endblock %}
 
 {% block content %}
@@ -28,7 +32,7 @@
 {% block extra_js %}
 <script>
     $(document).ready(function(){
-        $("#id_telefone").mask("(00) 00000-0000");
+        $("#id_fone").mask("(00) 0000-0000");
     });
 </script>
 {% endblock %}

@@ -1,4 +1,4 @@
-{% extends 'home.html' %}
+{% extends 'crud/detail.html' %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
@@ -6,38 +6,37 @@
     <li class="breadcrumb-item active" aria-current="page">Parcelas</li>
 {% endblock %}
 
+{% block nometela %}
+    Cliente: {{cliente.nome}}
+{% endblock %}
+
 {% block content %}
-    <h4>Cliente: {{cliente.nome}}</h4>
     {% if recebimento %}
-    <h5>Parcelas</h5>
-    <h3>R$ {{recebimento.total|floatformat:2}}</h3>
+        <h5>Parcelas</h5>
+        <h3>R$ {{recebimento.total|floatformat:2}}</h3>
     {% else %}
-    <h3>Saldo quitado.</h3>
+        <h3>Saldo quitado.</h3>
     {% endif %}
-    <table class="table table-striped table-sm" style="text-align: center;">
+    <table class="table table-hover table-sm" style="text-align: center;">
         <thead>
             <tr>
-                <th>Venda</th>
-                <th scope="col">Status</th>
-                <th scope="col">Valor</th>
-                <th scope="col">Valor pago</th>
-                <th scope="col">Negociada</th>
-                <th scope="col">Pagamento</th>
-                <th scope="col">Vencimento</th>
-                <th scope="col">Pagamento</th>
+                <th style="width: 20%;">Núm. Venda</th>
+                <th scope="col" style="width: 20%;">Status</th>
+                <th scope="col" style="width: 20%;">Valor</th>
+                <th scope="col" style="width: 20%;">Valor pago</th>
+                <th scope="col" style="width: 20%;">Tipo</th>
+                <th scope="col" style="width: 20%;">Pagamento</th>
             </tr>
         </thead>
         <tbody>
             {% for parcela in parcelas %}
             <tr>
-                <td>{{parcela.venda.num_venda}}</td>
-                <td>{{parcela.get_status_display}}</td>
-                <td>R$ {{parcela.valor}}</td>
-                <td>{% if parcela.valorpago %}R$ {{parcela.valorpago}}{% endif %}</td>
-                <td>{% if parcela.negociada %} Sim {% else %} Não {% endif %}</td>
-                <td>{{parcela.pagamento|default:''}}</td>
-                <td>{{parcela.datavecto|date:"d M, Y"}}</td>
-                <td>
+                <td style="width: 20%;">{{parcela.venda.num_venda}}</td>
+                <td style="width: 20%;">{{parcela.get_status_display}}</td>
+                <td style="width: 20%;">R$ {{parcela.valor}}</td>
+                <td style="width: 20%;">{% if parcela.valorpago %}R$ {{parcela.valorpago}}{% endif %}</td>
+                <td style="width: 20%;">{{parcela.pagamento|default:''}}</td>
+                <td style="width: 20%;">
                     {% if parcela.datapagto %}
                         {{parcela.datapagto|date:"d M, Y"}}
                     {% else %}
@@ -51,8 +50,11 @@
 {% endblock %}
 
 {% block botao_novo %}
-    <a class="btn btn-danger" href="{% url 'recebimento-list' %}">Voltar para listagem</a>
+    <a class="btn btn-outline-warning" href="{% url 'recebimento-list' %}">Listagem</a>
+{% endblock %}
+
+{% block botao2 %}
     {% if recebimento %}
-    <a class="btn btn-primary" href="{% url 'realizar-pagamento' recebimento.venda__cliente_id %}" role="button">Realizar pagamento</a>   
+        <a class="btn btn-outline-primary" href="{% url 'realizar-pagamento' recebimento.venda__cliente_id %}" role="button">Pagamento</a>
     {% endif %}
 {% endblock %}

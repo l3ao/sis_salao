@@ -34,6 +34,7 @@ def importar_all():
     importar_produtos()
     importar_pessoas()
 
+
 def importar_tabelasbasicas():
     # tabelas básicas (categorias, unidades de medidas, tipos de pagamento)
     try:

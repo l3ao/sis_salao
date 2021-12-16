@@ -1,11 +1,15 @@
-{% extends 'home.html' %}
+{% extends 'crud/form.html' %}
 
 {% load bootstrap %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'venda-list' %}">Vendas</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Nova venda</li>
+    <li class="breadcrumb-item"><a href="{% url 'venda-list' %}">Listagem</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Cadastro</li>
+{% endblock %}
+
+{% block nometela %}
+    Venda
 {% endblock %}
 
 {% block content %}
@@ -21,7 +25,11 @@
             <div class="row">
                 <div class="col-md-6"><b>Total: </b>R$ {{ venda.total|floatformat:2 }}</div>
                 {% if not venda.id %}
-                    <div class="col-md-6"><button type="submit" class="btn btn-primary float-end">Confirmar</button></div>
+                    <div class="col-md-12">
+                        <br>
+                        <a class="btn btn-danger" href="{% url 'venda-list' %}" role="button">Cancelar</a>
+                        <button type="submit" class="btn btn-primary float-end">Confirmar</button>
+                    </div>
                 {% endif %}
             </div>
         </form>
@@ -63,7 +71,7 @@
                             <td><a href="{% url 'itemvenda-update' item.id %}">{{item.produto.descricao}}</a></td>
                             <td>R$ {{item.produto.valorvenda}}</td>
                             <td>{{item.qtde}}</td>
-                            <td><a href="{% url 'itemvenda-delete' item.id %}"><i class="bi bi-trash"></i></a></td>
+                            <td><a href="{% url 'itemvenda-delete' item.id %}"><i class="fa fa-trash-o"></i></a></td>
                         </tr>
                         {% endfor %}
                     </tbody>

@@ -1,6 +1,5 @@
 from django.urls import path
-from django.contrib.auth.decorators import login_required
-from .views import ClienteListView, ClienteCreate, ClienteUpdate, ClienteDelete
+from .views import ClienteListView, ClienteCreate, ClienteUpdate, ClienteDelete, IndexView
 
 
 urlpatterns = [
@@ -8,4 +7,5 @@ urlpatterns = [
     path('add/', ClienteCreate.as_view(), name='cliente-add'),
     path('cliente/<int:pk>', ClienteUpdate.as_view(), name='cliente-update'),
     path('cliente/<int:pk>/delete', ClienteDelete.as_view(), name='cliente-delete'),
+    path('cliente_index/', IndexView.as_view(), name='cliente-index'),
 ]

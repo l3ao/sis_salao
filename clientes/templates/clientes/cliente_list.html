@@ -1,12 +1,16 @@
-{% extends 'home.html' %}
+{% extends 'crud/list.html' %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Clientes</li>
+    <li class="breadcrumb-item active" aria-current="page">Listagem</li>
+{% endblock %}
+
+{% block nometela %}
+    Clientes
 {% endblock %}
 
 {% block content %}
-    <table class="table table-striped table-sm">
+    <table class="table table-hover table-sm">
         <thead>
             <tr>
                 <th scope="col">Nome</th>
@@ -23,12 +27,13 @@
                 <td>{{cliente.data_nasc|date:"d, M-Y"}}</td>
                 <td>{{cliente.telefone}}</td>
                 <td>{{cliente.endereco}}</td>
-                <td style="text-align: center;"><a href="{% url 'cliente-delete' cliente.id %}"><i class="bi bi-trash"></i></a></td>
+                <td style="text-align: center;"><a href="{% url 'cliente-delete' cliente.id %}"><i class="fa fa-trash-o"></i></a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <div class="pagination" style="padding-top: 20px; padding-bottom: 50px;">
+    <br>
+    <div class="pagination">
         <span class="step-links" style="position: relative; margin-left: auto; margin-right: auto;">
             {% if lista_clientes.has_previous %}
             <a href="?page=1" class="btn btn-outline-secondary btn-sm">&laquo; Primeiro</a>
@@ -48,6 +53,7 @@
         </span>
     </div>
 {% endblock %}
+
 {% block botao_novo %}
-    <a class="btn btn-primary" href="{% url 'cliente-add' %}" role="button">Novo cliente</a>
+    <a class="btn btn-outline-primary" href="{% url 'cliente-add' %}" role="button">Novo cliente</a>
 {% endblock %}

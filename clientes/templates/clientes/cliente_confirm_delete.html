@@ -1,16 +1,21 @@
-{% extends 'home.html' %}
+{% extends 'crud/confirm_delete.html' %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'cliente-list' %}">Clientes</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'cliente-list' %}">Listagem</a></li>
     <li class="breadcrumb-item active" aria-current="page">Delete</li>
+{% endblock %}
+
+{% block nometela %}
+    Clientes
 {% endblock %}
 
 {% block content %}
     <h1>Voce tem certeza que desejar apagar o cliente: {{cliente}}?</h1>
     <form method="POST">
         {% csrf_token %}
+        <br>
         <a class="btn btn-danger" href="{% url 'cliente-list' %}" role="button">Cancelar</a>
-        <button type="submit" class="btn btn-primary float-right">Confirmar</button>
+        <button type="submit" class="btn btn-primary float-end">Confirmar</button>
     </form>
 {% endblock %}

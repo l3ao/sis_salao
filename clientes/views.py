@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View, TemplateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.core.paginator import Paginator
@@ -23,9 +23,9 @@ class ClienteListView(ListView):
         super().get(request, *args, **kwargs)
         termo_busca = request.GET.get('pesquisa', None)
         if termo_busca:
-            clientes = Cliente.objects.filter(nome__icontains=termo_busca)
+            clientes = Cliente.objects.filter(nome__icontains=termo_busca).order_by('nome')
         else:
-            clientes_list = Cliente.objects.all()
+            clientes_list = Cliente.objects.all().order_by('nome')
             paginator = Paginator(clientes_list, 12)
             page = request.GET.get('page')
             clientes = paginator.get_page(page)
@@ -68,3 +68,19 @@ class ClienteUpdate(View):
 class ClienteDelete(DeleteView):
     model = Cliente
     success_url = reverse_lazy('cliente-list')
+    
+
+class IndexView(TemplateView):
+    template_name = 'clientes/cliente_index.html'
+
+    def get(self, request, *args, **kwargs):
+        super().get(request, *args, **kwargs)
+        termo_busca = request.GET.get('pesquisa', None)
+        if termo_busca:
+            clientes = Cliente.objects.filter(nome__icontains=termo_busca).order_by('nome')
+        else:
+            clientes_list = Cliente.objects.all().order_by('nome')
+            paginator = Paginator(clientes_list, 12)
+            page = request.GET.get('page')
+            clientes = paginator.get_page(page)
+        return render(request, 'clientes/cliente_index.html', {'lista_clientes': clientes})

@@ -1,15 +1,18 @@
-{% extends 'home.html' %}
+{% extends 'crud/form.html' %}
 
 {% load bootstrap %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'compra-list' %}">Compras</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'compra-list' %}">Listagem</a></li>
     <li class="breadcrumb-item active" aria-current="page">Cadastro</li>
 {% endblock %}
 
+{% block nometela %}
+    Compra
+{% endblock %}
+
 {% block content %}
-    <h3>Cadastro de compras</h3>
     <form method="POST" action="{% url 'compra-add' %}">
         {% csrf_token %}
         <input type="hidden" value="{{compra.id}}" name="compra_id">

@@ -1,13 +1,17 @@
-{% extends 'home.html' %}
+{% extends 'crud/confirm_delete.html' %}
 
 {% block sidebar %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'venda-list' %}">Vendas</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Delete venda</li>
+    <li class="breadcrumb-item"><a href="{% url 'venda-list' %}">Listagem</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Delete</li>
+{% endblock %}
+
+{% block nometela %}
+    Venda
 {% endblock %}
 
 {% block content %}
-    <h3>Confirmar cancelamento da venda, número: {{venda.num_venda}}; cliente: {{venda.cliente}}.</h3>
+    <h3>Confirmar cancelamento da venda: número - {{venda.num_venda}}; cliente - {{venda.cliente}}.</h3>
     <form method="POST">
         {% csrf_token %}
         <br>
